@@ -5,10 +5,27 @@
  * Description: Adds an option to disable or enable the emoji output in Writing Settings.
  * Author: Sybre Waaijer
  * Author URI: https://cyberwire.nl/
- * Version: 1.0.8
- * License: GLPv2 or later
+ * Version: 1.0.9
+ * License: GLPv3
  * Text Domain: emoji-settings
  * Domain Path: /language
+ */
+
+/**
+ * Emoji Settings plugin
+ * Copyright (C) 2015 - 2016 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published
+ * by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 add_action( 'plugins_loaded', 'cw_emoji_settings_locale' );
@@ -25,15 +42,15 @@ function cw_emoji_settings_locale() {
 
 add_action( 'plugins_loaded', 'cw_emoji_settings', 5 );
 /**
- * Load and cache Emoji_Settings_Field class
+ * Loads and caches Emoji_Settings_Field class.
  *
+ * @since 1.0.7
+ * @staticvar object $cw_emoji_settings
  * @action plugins_loaded
  * @priority 5 Use anything above 5, or any action later than plugins_loaded and
  * you can access the class and functions.
  *
- * @staticvar object $cw_emoji_settings
- *
- * @since 1.0.7
+ * @return object
  */
 function cw_emoji_settings() {
 
@@ -43,8 +60,8 @@ function cw_emoji_settings() {
 	/**
 	 * Applies filters 'cw_emoji_settings_load' : bool Whether to load this plugin.
 	 */
-	if ( apply_filters( 'cw_emoji_settings_load', true ) )
-		if ( ! isset( $cw_emoji_settings ) )
+	if ( ! isset( $cw_emoji_settings ) )
+		if ( apply_filters( 'cw_emoji_settings_load', true ) )
 			$cw_emoji_settings = new Emoji_Settings_Field();
 
 	return $cw_emoji_settings;
@@ -80,8 +97,8 @@ class Emoji_Settings_Field {
 		$this->options = array(
 			'default' => '1',
 			'enable'  => false,
-			'disable' => false
-			);
+			'disable' => false,
+		);
 	}
 
 	/**
@@ -116,45 +133,35 @@ class Emoji_Settings_Field {
 	}
 
 	/**
-	 * Sanitize the options.
-	 * Prevents wrong filters.
+	 * Sanitizes and returns the options. Prevents wrong filters.
 	 *
 	 * @since 1.0.1
-	 *
 	 * @staticvar null|array $option_cached
 	 *
 	 * @return array Sanitized the emoji options
 	 */
 	protected function option() {
 
-		static $option_cached = null;
+		static $cache = null;
 
-		if ( isset( $option_cached ) )
-			return $option_cached;
+		if ( isset( $cache ) )
+			return $cache;
 
 		$options = $this->get_option();
 
-		//* Cache default in var.
-		$default = $options['default'];
-
-		//* Cast $default to one or zero.
-		if ( '1' !== $default && '0' !== $default ) {
-			if ( $default ) {
-				$options['default'] = '1';
-			} else {
-				$options['default'] = '0';
-			}
-		}
+		//* Cast $default to one or zero string.
+		if ( '1' !== $options['default'] && '0' !== $options['default'] )
+			$options['default'] = $default ? '1' : '0';
 
 		//* Cast 'enable' & 'disable' to bool.
 		$options['enable'] = (bool) $options['enable'];
 		$options['disable'] = (bool) $options['disable'];
 
-		return $option_cached = $options;
+		return $cache = $options;
 	}
 
 	/**
-	 * Add new fields to wp-admin/options-writing.php page
+	 * Adds a new fields to wp-admin/options-writing.php page.
 	 *
 	 * @since 1.0.0
 	 */
@@ -164,7 +171,7 @@ class Emoji_Settings_Field {
 
 		add_settings_field(
 			'enable_emoji',
-			__( 'Emoji Support', 'emoji-settings'),
+			esc_html__( 'Emoji Support', 'emoji-settings' ),
 			array( $this, 'fields_html' ),
 			'writing'
 		);
@@ -172,7 +179,7 @@ class Emoji_Settings_Field {
 	}
 
 	/**
-	 * HTML output for settings
+	 * Outputs HTML for settings.
 	 *
 	 * @since 1.0.0
 	 */
@@ -183,14 +190,13 @@ class Emoji_Settings_Field {
 
 		?>
 		<fieldset>
-			<legend class="screen-reader-text"><span><?php _e( 'Emoji Support', 'emoji-settings' ) ?></span></legend>
+			<legend class="screen-reader-text"><span><?php esc_html_e( 'Emoji Support', 'emoji-settings' ) ?></span></legend>
 			<label for="enable_emoji">
 				<input name="enable_emoji" type="checkbox" id="enable_emoji" value="1" <?php checked( '1', $enable ); ?> />
-				<?php _e( 'Enable emoji support', 'emoji-settings' ) ?>
+				<?php esc_html_e( 'Enable emoji support', 'emoji-settings' ) ?>
 			</label>
 		</fieldset>
 		<?php
-
 
 	}
 
@@ -199,15 +205,14 @@ class Emoji_Settings_Field {
 	 * Filter the options. Disables use_smilies on old WordPress installations if enable emojis is disabled.
 	 * This Prevents unreadable character output caused by 'use_smilies' option.
 	 *
-	 * @param array $options The options POST.
-	 *
 	 * @since 1.0.5
 	 *
+	 * @param array $options The options POST.
 	 * @return array $options The options to save.
 	 */
 	public function wp430_support( $options ) {
 
-		if ( ( ! isset( $_POST['enable_emoji'] ) || '1' !== $_POST['enable_emoji'] ) && isset( $_POST['use_smilies'] ) && '1' === $_POST['use_smilies'] ) {
+		if ( isset( $_POST['use_smilies'] ) && '1' === $_POST['use_smilies'] && ( ! isset( $_POST['enable_emoji'] ) || '1' !== $_POST['enable_emoji'] ) ) {
 			if ( get_site_option( 'initial_db_version' ) < 32453 ) {
 				update_option( 'use_smilies', '0' );
 			}
@@ -220,8 +225,6 @@ class Emoji_Settings_Field {
 	 * Disable the emoji output based on option
 	 *
 	 * @since 1.0.0
-	 *
-	 * @uses disable_emojis_tinymce
 	 */
 	public function disable_emojis( $options = array() ) {
 
@@ -236,11 +239,8 @@ class Emoji_Settings_Field {
 
 		/**
 		 * If the emoji settings is set to off:	remove the emoji scripts and other settings.
-		 *
 		 * If the enable value is set to true: 	Keep the emoji scripts output.
 		 * If the disable value is set to true: Remove the emoji scripts output.
-		 *
-		 * @since 1.0.0
 		 */
 		if ( $option['disable'] || ( ! $option['enable'] && '1' !== $default ) ) {
 			/*
@@ -259,18 +259,16 @@ class Emoji_Settings_Field {
 				remove_action( 'init', 'smilies_init', 5 ); // This removes the ascii to smiley convertion
 			}
 		}
-
 	}
 
 	/**
-	 * Filter function used to remove the tinymce emoji plugin.
+	 * Filters tinyMCE plugins in order to remove wpmemoji support.
 	 *
 	 * @since 1.0.0
-	 *
 	 * @credits https://wordpress.org/plugins/disable-emojis/
 	 *
-	 * @param    array  $plugins
-	 * @return   array	Difference betwen the two arrays
+	 * @param array $plugins The tinyMCE plugins.
+	 * @return array the tinyMCE plugins without wpemoji.
 	 */
 	public function disable_emojis_tinymce( $plugins ) {
 
@@ -279,7 +277,5 @@ class Emoji_Settings_Field {
 		} else {
 			return array();
 		}
-
 	}
-
 }

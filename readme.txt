@@ -3,7 +3,7 @@ Contributors: Cybr
 Tags: emoji, emojis, enable, disable, option, writing, emoticon, script, print, tinymce, admin, frontend, mail, filter, settings
 Requires at least: 4.2.0
 Tested up to: 4.5.2
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,12 @@ The Dutch translations are maintained by the plugin author. You can submit your 
 1. That's it! Enjoy!
 
 == Changelog ==
+
+= 1.0.9 =
+* Improved: Overall sanitation (WordPress.com VIP standards).
+* Changed: The class loader function caches the filter within as well.
+* Other: Cleaned up code.
+* Note: Plugin license is upgraded from GPLv2+ to GPLv3.
 
 = 1.0.8 =
 * Improved: (performance) Saving Writing Settings no longer casts the Emoji Setting to an 1 or 0 string when it's already an 1 or 0 string.
