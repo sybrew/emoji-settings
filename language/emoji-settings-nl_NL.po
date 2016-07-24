@@ -1,0 +1,50 @@
+# Copyright (C) 2015 Emoji Settings
+# This file is distributed under the same license as the Emoji Settings package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Emoji Settings 1.0.6\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/emoji-settings\n"
+"POT-Creation-Date: 2015-12-25 11:03+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-12-25 11:04+0100\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.5\n"
+"Last-Translator: Sybre Waaijer <info@cyberwire.nl>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl_NL\n"
+
+#: emojisettings.php:165 emojisettings.php:184
+msgid "Emoji Support"
+msgstr "Emoji Ondersteuning"
+
+#: emojisettings.php:187
+msgid "Enable emoji support"
+msgstr "Schakel emoji ondersteuning in"
+
+#. Plugin Name of the plugin/theme
+msgid "Emoji Settings"
+msgstr "Emoji Instellingen"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/emoji-settings/"
+msgstr "https://nl.wordpress.org/plugins/emoji-settings/"
+
+#. Description of the plugin/theme
+msgid ""
+"Adds an option to disable or enable the emoji output in Writing Settings. "
+"Just like the former \"convert emoticons\" setting. This option is enabled "
+"by default."
+msgstr ""
+"Voegt een optie toe om emoji uitvoer in of uit te schakelen in Schrijven "
+"Instellingen. Net zoals de voorgaande \"Emoticons omzetten\" instelling. "
+"Deze optie is standaard ingeschakeld."
+
+#. Author of the plugin/theme
+msgid "Sybre Waaijer"
+msgstr "Sybre Waaijer"
+
+#. Author URI of the plugin/theme
+msgid "https://cyberwire.nl/"
+msgstr "https://cyberwire.nl/"
