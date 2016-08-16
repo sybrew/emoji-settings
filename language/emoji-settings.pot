@@ -1,22 +1,22 @@
-# Copyright (C) 2015 Emoji Settings
+# Copyright (C) 2016 Emoji Settings
 # This file is distributed under the same license as the Emoji Settings package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Emoji Settings 1.0.6\n"
+"Project-Id-Version: Emoji Settings 1.0.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/emoji-settings\n"
-"POT-Creation-Date: 2015-12-25 10:02:58+00:00\n"
+"POT-Creation-Date: 2016-08-16 20:26:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: emojisettings.php:165 emojisettings.php:184
+#: emojisettings.php:174 emojisettings.php:193
 msgid "Emoji Support"
 msgstr ""
 
-#: emojisettings.php:187
+#: emojisettings.php:196
 msgid "Enable emoji support"
 msgstr ""
 #. Plugin Name of the plugin/theme
@@ -28,7 +28,7 @@ msgid "https://wordpress.org/plugins/emoji-settings/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Adds an option to disable or enable the emoji output in Writing Settings. Just like the former \"convert emoticons\" setting. This option is enabled by default."
+msgid "Adds an option to disable or enable the emoji output in Writing Settings."
 msgstr ""
 
 #. Author of the plugin/theme

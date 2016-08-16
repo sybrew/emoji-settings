@@ -5,7 +5,7 @@
  * Description: Adds an option to disable or enable the emoji output in Writing Settings.
  * Author: Sybre Waaijer
  * Author URI: https://cyberwire.nl/
- * Version: 1.0.9
+ * Version: 1.0.10
  * License: GLPv3
  * Text Domain: emoji-settings
  * Domain Path: /language
@@ -149,9 +149,8 @@ class Emoji_Settings_Field {
 
 		$options = $this->get_option();
 
-		//* Cast $default to one or zero string.
-		if ( '1' !== $options['default'] && '0' !== $options['default'] )
-			$options['default'] = $default ? '1' : '0';
+		//* Cast $default to bool, then one or zero, then one or zero string.
+		$options['default'] = (string) (int) (bool) $options['default'];
 
 		//* Cast 'enable' & 'disable' to bool.
 		$options['enable'] = (bool) $options['enable'];
