@@ -253,6 +253,9 @@ class Emoji_Settings_Field {
 			remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); // Remove from feed, this is bad behaviour!
 			remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' ); // Remove from mail
 			add_filter( 'tiny_mce_plugins', array( $this, 'disable_emojis_tinymce' ) ); // Remove from tinymce
+			
+			// Remove DNS prefetch s.w.org (used for emojis, since WP 4.7)
+			add_filter( 'emoji_svg_url', '__return_false' );
 
 			if ( get_site_option( 'initial_db_version' ) >= 32453 ) {
 				remove_action( 'init', 'smilies_init', 5 ); // This removes the ascii to smiley convertion
