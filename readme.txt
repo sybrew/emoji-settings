@@ -2,8 +2,8 @@
 Contributors: Cybr
 Tags: emoji, emojis, enable, disable, option, writing, emoticon, script, print, tinymce, admin, frontend, mail, filter, settings
 Requires at least: 4.2.0
-Tested up to: 4.6.0
-Stable tag: 1.0.10
+Tested up to: 4.9.1
+Stable tag: 1.0.11
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -39,6 +39,9 @@ You can submit your own translations through the sidebar on this page.
 1. That's it! Enjoy!
 
 == Changelog ==
+
+= 1.0.11 =
+* Tested up to WP 4.9.x
 
 = 1.0.10 =
 * Fixed: When `the_emoji_options` filter was used erronously, a PHP notice would be cast on every page load.
