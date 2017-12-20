@@ -122,9 +122,9 @@ class Emoji_Settings_Field {
 		 * @param array $options {
 		 *      Arguments for Emoji settings.
 		 *
-		 *      @type string 	$default		Turn global emoji output on or off by default before settings applied.
-		 *      @type bool 		$enable			Override the settings and turn the emojis on anyway.
-		 *      @type bool 		$disable		Override the settings and turn the emojis off anyway.
+		 *      @type string $default Turn global emoji output on or off by default before settings applied.
+		 *      @type bool   $enable  Override the settings and turn the emojis on anyway.
+		 *      @type bool   $disable Override the settings and turn the emojis off anyway.
 		 * }
 		 */
 		$options = (array) apply_filters( 'the_emoji_options', wp_parse_args( $options, $this->options ) );
@@ -189,10 +189,10 @@ class Emoji_Settings_Field {
 
 		?>
 		<fieldset>
-			<legend class="screen-reader-text"><span><?php esc_html_e( 'Emoji Support', 'emoji-settings' ) ?></span></legend>
+			<legend class="screen-reader-text"><span><?php esc_html_e( 'Emoji Support', 'emoji-settings' ); ?></span></legend>
 			<label for="enable_emoji">
 				<input name="enable_emoji" type="checkbox" id="enable_emoji" value="1" <?php checked( '1', $enable ); ?> />
-				<?php esc_html_e( 'Enable emoji support', 'emoji-settings' ) ?>
+				<?php esc_html_e( 'Enable emoji support', 'emoji-settings' ); ?>
 			</label>
 		</fieldset>
 		<?php
@@ -237,8 +237,8 @@ class Emoji_Settings_Field {
 		$default = get_option( 'enable_emoji', $option['default'] );
 
 		/**
-		 * If the emoji settings is set to off:	remove the emoji scripts and other settings.
-		 * If the enable value is set to true: 	Keep the emoji scripts output.
+		 * If the emoji settings is set to off: Remove the emoji scripts and other settings.
+		 * If the enable value is set to true:  Keep the emoji scripts output.
 		 * If the disable value is set to true: Remove the emoji scripts output.
 		 */
 		if ( $option['disable'] || ( ! $option['enable'] && '1' !== $default ) ) {
@@ -253,7 +253,7 @@ class Emoji_Settings_Field {
 			remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); // Remove from feed, this is bad behaviour!
 			remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' ); // Remove from mail
 			add_filter( 'tiny_mce_plugins', array( $this, 'disable_emojis_tinymce' ) ); // Remove from tinymce
-			
+
 			// Remove DNS prefetch s.w.org (used for emojis, since WP 4.7)
 			add_filter( 'emoji_svg_url', '__return_false' );
 

@@ -1,6 +1,6 @@
 === Emoji Settings ===
 Contributors: Cybr
-Tags: emoji, emojis, enable, disable, option, writing, emoticon, script, print, tinymce, admin, frontend, mail, filter, settings
+Tags: emoji, emojis, emoticon, script, tinymce, mail
 Requires at least: 4.2.0
 Tested up to: 4.9.1
 Stable tag: 1.1.1
@@ -17,7 +17,7 @@ Emoji Settings adds an option within your Writing Settings page to disable or en
 
 The option can be found under `http://example.com/wp-admin/options-writing.php`.
 
-Works on both Multsite networks and Single sites.
+Works on both multisite networks and single sites.
 
 > <strong>Enabled by default</strong><br>
 > This plugin has been written for WordPress Multisite with a WordPress.com like environment in mind.
@@ -35,7 +35,7 @@ You can submit your own translations through the sidebar on this page.
 
 1. Install Emoji Settings either via the WordPress.org plugin directory, or by uploading the files to your server.
 1. Either Network Activate this plugin or activate it on a single site.
-1. You can now disable emojis through the admin menu under wp-admin/options-writing.php
+1. You can now disable emojis through the admin menu under `wp-admin/options-writing.php`
 1. That's it! Enjoy!
 
 == Changelog ==
@@ -44,7 +44,7 @@ You can submit your own translations through the sidebar on this page.
 * Tested up to WP 4.9.x
 
 = 1.0.10 =
-* Fixed: When `the_emoji_options` filter was used erronously, a PHP notice would be cast on every page load.
+* Fixed: When `the_emoji_options` filter was used erroneously, a PHP notice would be cast on every page load.
 * Fixed: Updated license links in readme and included license file.
 * Fixed: Readme typos.
 
