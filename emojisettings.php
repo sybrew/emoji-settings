@@ -5,7 +5,7 @@
  * Description: Adds an option to disable or enable the emoji output in Writing Settings.
  * Author: Sybre Waaijer
  * Author URI: https://cyberwire.nl/
- * Version: 1.0.10
+ * Version: 1.1.1
  * License: GLPv3
  * Text Domain: emoji-settings
  * Domain Path: /language
