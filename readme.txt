@@ -1,45 +1,56 @@
 === Emoji Settings ===
 Contributors: Cybr
-Tags: emoji, emojis, emoticon, script, tinymce, mail
+Tags: Emoji, emojis, emoticon, script, tinymce, mail
 Requires at least: 4.2.0
-Tested up to: 6.0
-Stable tag: 1.2.0
-Requires PHP: 5.6.0
+Tested up to: 6.1
+Stable tag: 2.0.0
+Requires PHP: 7.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Emoji Settings adds an option within your Writing Settings page to disable or enable emojis.
+Emoji Settings adds an option to your Writing Settings page to enable or disable emoji conversion to images.
 
 == Description ==
 
-= Emoji Settings =
+**Simply enable or disable emojis conversion with an option.**
 
-**Simply enable or disable emojis with an option.**
+This plugin stops the conversion of ASCII smilies like `:)` and `:D` to images on any WordPress installation.
 
-The option can be found at "Settings -> Writing" (`/wp-admin/options-writing.php`).
+You can find the option at "Settings > Writing" (`/wp-admin/options-writing.php`).
 
-Works on both multisite networks and single sites.
+This plugin does not prevent real emojis from being stored and printed.
 
-> <strong>Enabled by default</strong><br>
-> This plugin has been written for WordPress Multisite with a WordPress.com like environment in mind.
->
-> Because of this, we want to give users full functionality and awesomeness with the least configuration.
-> If a user wishes to disable emojis for their site, they can simply do so in their dashboard.
+= Emojis are enabled by default =
 
-This plugin also fixes incorrect Character Encoding on WordPress installations installed prior to 4.3.0 when emojis are disabled.
+This plugin has been written with a WordPress.com-like environment in mind. We want to give users the option but not override default WordPress behavior. If you or your user wishes to disable emojis for their site, they can do so in their dashboard.
+
+You can override standard behavior via filter `cw_emoji_overrides`. Refer to the code for instructions.
+
+= Does more than "Disable Emojis (GDPR friendly)" =
+
+This plugin also fixes incorrect Character Encoding on WordPress installations installed before 4.3.0 when emojis are disabled.
+This plugin also removes the conversion of emojis in the admin area, for example, from post titles.
 
 = Translating =
 
-You can submit your own translations via the sidebar on this page.
+You can submit your translations via the sidebar on this page.
 
 == Installation ==
 
-1. Install Emoji Settings either via the WordPress.org plugin directory, or by uploading the files to your server.
+1. Install Emoji Settings either via the WordPress.org plugin directory or by uploading the files to your server.
 1. Either Network Activate this plugin or activate it on a single site.
-1. You can now disable emojis through the admin menu under `wp-admin/options-writing.php`
+1. You can now disable emojis through the admin menu under `wp-admin/options-writing.php`.
 1. That's it! Enjoy!
 
 == Changelog ==
+
+= 2.0.0 =
+* Rewritten for improved performance.
+* All function and class names have changed due to added namespacing, hence the major version bump.
+* Now requires PHP 7.2 or later.
+* Added filter `cw_emoji_overrides`, accepts array `[ 'default' => string 1|0, 'force_support' => ?bool ]`.
+* Removed confusing filter `the_emoji_options`.
+* Changed the option label from "Enable emoji support" to "Enable emoji conversion"; this plugin prevents the conversion, it does not prevent actual emojis from being stored and printed.
 
 = 1.2.0 =
 * Now properly removes the detection script and styles from all admin screens.
@@ -50,7 +61,7 @@ You can submit your own translations via the sidebar on this page.
 * Tested up to WP 4.9.
 
 = 1.0.10 =
-* Fixed: When `the_emoji_options` filter was used erroneously, a PHP notice would be cast on every page load.
+* Fixed: When `the_emoji_options` filter was incorrectly used, a PHP notice would be cast on every page load.
 * Fixed: Updated license links in readme and included license file.
 * Fixed: Readme typos.
 
@@ -58,7 +69,7 @@ You can submit your own translations via the sidebar on this page.
 * Improved: Overall sanitation (WordPress.com VIP standards).
 * Changed: The class loader function caches the filter within as well.
 * Updated: POT file.
-* Removed: Dutch translation files, these are now provided through WordPress.org.
+* Removed: Dutch translation files; these are now provided through WordPress.org.
 * Other: Cleaned up code.
 * Note: Plugin license is upgraded from GPLv2+ to GPLv3.
 
@@ -76,7 +87,7 @@ You can submit your own translations via the sidebar on this page.
 * Added: POT translation file.
 * Changed: Plugin translation domain.
 * Updated: Translation files.
-* Improved: The defaults filter is now always casted to array.
+* Improved: The defaults filter is now always cast to an array.
 * Improved: Reduced plugin memory footprint.
 * Cleaned up code.
 
@@ -86,69 +97,21 @@ You can submit your own translations via the sidebar on this page.
 * Tested up to WP 4.4.0
 
 = 1.0.5 =
-* Fixed: New WordPress installations (4.3 and up) don't have the option to turn off smileys. This leads to incorrect character encoding of smiley abbrevations, like :) and :D. Therefor the whole function to encode characters will be removed if emoji's are set to disabled.
-* Fixed: Old WordPress installations with WordPress 4.3 and up will automatically set the smileys to off if Emoji support is disabled for the same reason as above. This only has effect after updating the page for the first time.
+* Fixed: New WordPress installations (4.3 and up) don't have the option to turn off smileys. Those before now have incorrect character encoding of smiley abbreviations, like :) and :D, when emojis are disabled. So, when you disable emojis, smilies will also be disabled.
+* Improved: When disabling emojis, the smilies setting will also be disabled to reflect the workings of this plugin visually.
 
 = 1.0.4 =
-* This plugin now supports PHP 5.2 and up
+* This plugin now supports PHP 5.2 and up.
 
 = 1.0.3 =
-* Now correctly removes scripts from admin pages
+* Now correctly removes scripts from admin pages.
 
 = 1.0.2 =
-* Fixed option call priority
+* Fixed option call priority.
 
 = 1.0.1 =
-* Fixed html in option page
-* Added filter 'the_emoji_options', read "Other Notes" for more information and usage
+* Fixed HTML on the options page.
+* Added filter `the_emoji_options`.
 
 = 1.0.0 =
 * Initial Release
-
-== Other Notes ==
-
-= Filters =
-
-There are two filters for this plugin,
-One filter disables the plugin completely, the other filter changes the default settings of Emoji Settings.
-
-Add any of these filter functions to your theme functions.php or template file, or a seperate plugin.
-
-`//* Prevent the plugin from loading
-add_action( 'plugins_loaded', 'my_emoji_settings_disable', 4 );
-function my_emoji_settings_disable() {
-	add_filter( 'cw_emoji_settings_load', '__return_false' );
-}`
-
-`//* Modify Default Emoji settings, example
-add_filter( 'the_emoji_options', 'my_default_emoji_settings' );
-function my_default_emoji_settings( $options ) {
-
-	// Set this to 1 or 0 to enable or disable Emoji output by default. Great for multisite installations.
-	// Default is 1.
-	$options['default'] = '0';
-
-	return $options;
-}`
-
-`//* Override the emoji setting and disable output, example
-add_filter( 'the_emoji_options', 'my_disable_emoji' );
-function my_disable_emoji( $options ) {
-	// Set this to true to disable emoji output anyway regardless of other settings. Set to false to rely on the option in the Writing Settings page.
-	// Default is false
-	// Example: Disable emojis on home page regardless of settings.
-	$options['disable'] = true;
-
-	return $options;
-}`
-
-`//* Override the emoji setting and enable output, example
-add_filter( 'the_emoji_options', 'my_postpage_emoji_function' );
-function my_postpage_emoji_function( $options ) {
-	// Set this to true to enable emoji output anyway. Set to false to rely on the option in the Writing Settings page.
-	// Default is false
-	// Example: Enable emoji's on Post type pages regardless of settings.
-	$options['enable'] = true;
-
-	return $options;
-}`
