@@ -2,8 +2,9 @@
 Contributors: Cybr
 Tags: emoji, emojis, emoticon, script, tinymce, mail
 Requires at least: 4.2.0
-Tested up to: 4.9.1
-Stable tag: 1.1.1
+Tested up to: 6.0
+Stable tag: 1.2.0
+Requires PHP: 5.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +16,7 @@ Emoji Settings adds an option within your Writing Settings page to disable or en
 
 **Simply enable or disable emojis with an option.**
 
-The option can be found under `http://example.com/wp-admin/options-writing.php`.
+The option can be found at "Settings -> Writing" (`/wp-admin/options-writing.php`).
 
 Works on both multisite networks and single sites.
 
@@ -29,7 +30,7 @@ This plugin also fixes incorrect Character Encoding on WordPress installations i
 
 = Translating =
 
-You can submit your own translations through the sidebar on this page.
+You can submit your own translations via the sidebar on this page.
 
 == Installation ==
 
@@ -40,8 +41,13 @@ You can submit your own translations through the sidebar on this page.
 
 == Changelog ==
 
+= 1.2.0 =
+* Now properly removes the detection script and styles from all admin screens.
+* Now requires PHP 5.6 or later.
+* Tested up to WP 6.0.
+
 = 1.1.1 =
-* Tested up to WP 4.9.x
+* Tested up to WP 4.9.
 
 = 1.0.10 =
 * Fixed: When `the_emoji_options` filter was used erroneously, a PHP notice would be cast on every page load.
