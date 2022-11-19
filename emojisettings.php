@@ -128,7 +128,7 @@ class Emoji_Settings {
 
 		\add_settings_field(
 			'enable_emoji',
-			\esc_html__( 'Emoji Support', 'emoji-settings' ),
+			\esc_html__( 'Emoji Conversion', 'emoji-settings' ),
 			[ $this, 'fields_html' ],
 			'writing'
 		);
@@ -149,13 +149,13 @@ class Emoji_Settings {
 				</label>
 			</fieldset>',
 			[
-				\esc_html__( 'Emoji Support', 'emoji-settings' ),
+				\esc_html__( 'Emoji Conversion', 'emoji-settings' ),
 				\checked(
 					'1',
 					\get_option( 'enable_emoji', $this->get_setting_overrides()['default'] ),
 					false
 				),
-				\esc_html__( 'Enable emoji conversion', 'emoji-settings' ),
+				\esc_html__( 'Enable text to emoji conversion', 'emoji-settings' ),
 			]
 		);
 	}
