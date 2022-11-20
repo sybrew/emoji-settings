@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-19T14:06:41+00:00\n"
+"POT-Creation-Date: 2022-11-20T04:58:34+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: emoji-settings\n"
@@ -34,11 +34,11 @@ msgstr ""
 msgid "https://cyberwire.nl/"
 msgstr ""
 
-#: emojisettings.php:131
-#: emojisettings.php:152
+#: emojisettings.php:126
+#: emojisettings.php:147
 msgid "Emoji Conversion"
 msgstr ""
 
-#: emojisettings.php:158
+#: emojisettings.php:153
 msgid "Enable text to emoji conversion"
 msgstr ""

@@ -2,13 +2,13 @@
 	"name": "sybrew/emoji-settings",
 	"description": "Emoji Settings adds an option to your WordPress Writing Settings page to disable or enable emojis.",
 	"keywords": [
-		"seo",
+		"emoji",
 		"wordpress",
 		"plugin"
 	],
 	"type": "wordpress-plugin",
 	"license": "GPL-3.0-only",
-	"homepage": "https://theseoframework.com/",
+	"homepage": "https://wordpress.org/plugins/emoji-settings/",
 	"authors": [
 		{
 			"name": "Sybre Waaijer",
@@ -32,11 +32,6 @@
 		"php:lint": "composer install && vendor/bin/phpcs -p -s",
 		"php:autofix": "composer install && vendor/bin/phpcbf",
 		"php:lint:errors": "composer install && vendor/bin/phpcs -p -s --runtime-set ignore_warnings_on_exit 1"
-	},
-	"support": {
-		"docs": "https://theseoframework.com/docs/",
-		"forum": "https://wordpress.org/support/plugin/autodescription/",
-		"wiki": "https://github.com/sybrew/the-seo-framework/wiki"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true

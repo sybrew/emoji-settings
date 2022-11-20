@@ -32,32 +32,19 @@ namespace CyberWire\Emoji_Settings;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-\add_action( 'plugins_loaded', __NAMESPACE__ . '\\_load_settings_locale' );
+\add_action( 'plugins_loaded', __NAMESPACE__ . '\\init', 5 );
 /**
- * Plugin locale 'emoji-settings'
- *
- * File located in plugin folder emoji-settings/language/
- *
- * @since 2.0.0
- */
-function _load_settings_locale() {
-	\load_plugin_textdomain( 'emoji-settings', false, basename( __DIR__ ) . '/language/' );
-}
-
-\add_action( 'plugins_loaded', __NAMESPACE__ . '\\get_class', 5 );
-/**
- * Loads and caches Emoji_Settings class.
+ * Loads and memoizes Emoji_Settings class.
  *
  * @since 2.0.0
  * @action plugins_loaded
  * @priority 5 Use anything above 5, or any action later than plugins_loaded and
  * you can access the class and functions.
  *
- * @return object
+ * @return CyberWire\Emoji_Settings\Emoji_Settings
  */
-function get_class() {
+function init() {
 
-	//* Cache the class. Do not run everything more than once.
 	static $class = null;
 
 	/**
@@ -85,6 +72,14 @@ class Emoji_Settings {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+
+		// File located in plugin folder emoji-settings/language/
+		\load_plugin_textdomain(
+			'emoji-settings',
+			false,
+			\dirname( \plugin_basename( __FILE__ ) ) . '/language'
+		);
+
 		\add_action( 'init', [ $this, 'disable_emojis' ], 4 );
 		\add_filter( 'admin_init', [ $this, '_register_fields' ] );
 	}
@@ -170,9 +165,6 @@ class Emoji_Settings {
 	 * @return array $options The options to save.
 	 */
 	public function wp_32453_support( $options ) {
-
-		// When smilies are enabled, but emojis are disabled, disable smilies.
-
 		// phpcs:disable, WordPress.Security.NonceVerification -- checked by default settings page handler.
 		if ( '1' === ( $_POST['use_smilies'] ?? null )  // Smilies are enabled.
 		  && '1' !== ( $_POST['enable_emoji'] ?? null ) // But emojis are disabled.

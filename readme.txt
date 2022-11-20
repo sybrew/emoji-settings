@@ -1,39 +1,38 @@
 === Emoji Settings ===
 Contributors: Cybr
-Tags: Emoji, emojis, emoticon, script, tinymce, mail
-Requires at least: 4.2.0
+Tags: Emoji, emojis, emoticon, script, tinymce, mail, scrips, prefetch, twemoji
+Requires at least: 5.5
 Tested up to: 6.1
 Stable tag: 2.0.0
 Requires PHP: 7.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Emoji Settings adds an option to your Writing Settings page to enable or disable emoji conversion to images.
+Emoji Settings adds an option to your Writing Settings page to toggle emoji conversion to images.
 
 == Description ==
 
-**Simply enable or disable emojis conversion with an option.**
+**Quickly enable or disable emojis conversion with an option.**
 
-This plugin stops the conversion of ASCII smilies like `:)` and `:D` to images on any WordPress installation.
+When you disable the option, Emoji Settings stops the conversion of ASCII smilies like `:)` and `:D` to images on any WordPress installation. This plugin also prevents changing real emojis to Twemoji (Twitter) images. It achieves this by removing several default WordPress scripts.
 
 You can find the option at "Settings > Writing" (`/wp-admin/options-writing.php`).
 
-This plugin does not prevent real emojis from being stored and printed.
+This plugin does not prevent real emojis (inserted via an emoji keyboard) from being stored and outputted on your website.
 
-= Emojis are enabled by default =
+= Emoji conversion enabled by default =
 
-This plugin has been written with a WordPress.com-like environment in mind. We want to give users the option but not override default WordPress behavior. If you or your user wishes to disable emojis for their site, they can do so in their dashboard.
+I wrote this plugin with a WordPress.com-like environment in mind, giving users an option without overriding standard WordPress behavior.
 
-You can override standard behavior via filter `cw_emoji_overrides`. Refer to the code for instructions.
+You can change this behavior via filter `cw_emoji_overrides`. Refer to the code for instructions.
 
-= Does more than "Disable Emojis (GDPR friendly)" =
+= Does more than "Disable Emojis" =
 
-This plugin also fixes incorrect Character Encoding on WordPress installations installed before 4.3.0 when emojis are disabled.
-This plugin also removes the conversion of emojis in the admin area, for example, from post titles.
+Emoji Settings also fixes Character Encoding issues on sites originally installed with WP 4.2 or lower. And this plugin correctly removes the conversion of emojis in the admin area, for example, from post titles.
 
 = Translating =
 
-You can submit your translations via the sidebar on this page.
+You can contribute by translating Emoji Settings via the sidebar on this page.
 
 == Installation ==
 
@@ -42,15 +41,27 @@ You can submit your translations via the sidebar on this page.
 1. You can now disable emojis through the admin menu under `wp-admin/options-writing.php`.
 1. That's it! Enjoy!
 
+== Frequently Asked Questions ==
+
+= How do I disable emojis by default =
+
+You can implement this filter to achieve that:
+
+`add_filter( 'cw_emoji_overrides', function( $overrides ) {
+	$overrides['default'] = '0'; // Set disabled by default.
+	return $overrides;
+} );`
+
 == Changelog ==
 
 = 2.0.0 =
 * Rewritten for improved performance.
-* All function and class names have changed due to added namespacing, hence the major version bump.
 * Now requires PHP 7.2 or later.
+* Now requires WP 5.5 or later, because it adds tests against PHP support.
+* All function and class names have changed due to added namespacing, hence the major version bump.
 * Added filter `cw_emoji_overrides`, accepts array `[ 'default' => string 1|0, 'force_support' => ?bool ]`.
 * Removed confusing filter `the_emoji_options`.
-* Changed the option label from "Enable emoji support" to "Enable emoji conversion"; this plugin prevents the conversion, it does not prevent actual emojis from being stored and printed.
+* Changed the option label from "Enable emoji support" to "Enable emoji conversion": this plugin prevents the conversion; it does not prevent actual emojis from being stored and printed.
 
 = 1.2.0 =
 * Now properly removes the detection script and styles from all admin screens.
