@@ -51,7 +51,7 @@ function init() {
 	 * @since 1.0.0
 	 * @param bool $load Whether to load this plugin.
 	 */
-	if ( ! isset( $class ) && \apply_filters( 'cw_emoji_settings_load', true ) )
+	if ( empty( $class ) && \apply_filters( 'cw_emoji_settings_load', true ) )
 		$class = new Emoji_Settings();
 
 	return $class;
@@ -119,7 +119,16 @@ class Emoji_Settings {
 	 */
 	public function _register_fields() {
 
-		\register_setting( 'writing', 'enable_emoji', [ $this, 'wp_32453_support' ] );
+		\register_setting(
+			'writing',
+			'enable_emoji',
+			[
+				'sanitize_callback' => [ $this, 'sanitize_emoji_setting' ],
+			]
+		);
+
+		if ( false === \get_option( 'enable_emoji' ) )
+			\add_option( 'enable_emoji', $this->get_setting_overrides()['default'] );
 
 		\add_settings_field(
 			'enable_emoji',
@@ -155,26 +164,33 @@ class Emoji_Settings {
 		);
 	}
 
+
 	/**
-	 * When smilies are enabled, but emojis are disabled, disable smilies. Only affects sites installed with WP<4.3.
+	 * Sanitizes the emoji setting.
+	 *
+	 * Also, when smilies are enabled, but emojis are disabled, disable smilies. Only affects sites installed with WP<4.3.
 	 * This Prevents unreadable character output caused by 'use_smilies' option.
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param array $options The options POST.
+	 * @param mixed $setting The emoji settings option.
 	 * @return array $options The options to save.
 	 */
-	public function wp_32453_support( $options ) {
+	public function sanitize_emoji_setting( $setting ) {
+
+		$setting = (string) (int) $setting;
+
 		// phpcs:disable, WordPress.Security.NonceVerification -- checked by default settings page handler.
-		if ( '1' === ( $_POST['use_smilies'] ?? null )  // Smilies are enabled.
-		  && '1' !== ( $_POST['enable_emoji'] ?? null ) // But emojis are disabled.
-		  && \get_site_option( 'initial_db_version' ) < 32453 // Test if initial is below WP 4.3.0
+		if (
+			   '1' === ( $_POST['use_smilies'] ?? null )  // Smilies are enabled.
+			&& '1' !== $setting // But emojis are disabled.
+			&& \get_site_option( 'initial_db_version' ) < 32453 // Test if initial is below WP 4.3.0
 		) {
 			\update_option( 'use_smilies', '0' );
 		}
 		// phpcs:enable, WordPress.Security.NonceVerification
 
-		return $options;
+		return $setting;
 	}
 
 	/**

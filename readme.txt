@@ -1,9 +1,10 @@
 === Emoji Settings ===
 Contributors: Cybr
+Donate link: https://github.com/sponsors/sybrew
 Tags: Emoji, emojis, emoticon, script, tinymce, mail, scrips, prefetch, twemoji
 Requires at least: 5.5
-Tested up to: 6.1
-Stable tag: 2.0.0
+Tested up to: 6.4
+Stable tag: 2.0.1
 Requires PHP: 7.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -54,10 +55,14 @@ You can implement this filter to achieve that:
 
 == Changelog ==
 
+= 2.0.1 =
+* Now stores the default setting in the database. This prevents extraneous lookups for unconfigured websites.
+* When emojis conversion is disabled, the string `'0'` will now be stored in the database, instead of an empty string `''`. This will only take effect when the writing settings are resaved.
+
 = 2.0.0 =
 * Rewritten for improved performance.
 * Now requires PHP 7.2 or later.
-* Now requires WP 5.5 or later, because it adds tests against PHP support.
+* Now requires WP 5.5 or later because it adds tests against PHP support.
 * All function and class names have changed due to added namespacing, hence the major version bump.
 * Added filter `cw_emoji_overrides`, accepts array `[ 'default' => string 1|0, 'force_support' => ?bool ]`.
 * Removed confusing filter `the_emoji_options`.
