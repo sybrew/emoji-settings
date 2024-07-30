@@ -1,17 +1,17 @@
-# Copyright (C) 2022 Sybre Waaijer
-# This file is distributed under the same license as the Emoji Settings plugin.
+# Copyright (C) 2024 Sybre Waaijer
+# This file is distributed under the GLPv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Emoji Settings 2.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
+"Project-Id-Version: Emoji Settings 2.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/emoji-settings\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-20T04:58:34+00:00\n"
+"POT-Creation-Date: 2024-07-30T04:48:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
+"X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: emoji-settings\n"
 
 #. Plugin Name of the plugin
@@ -34,11 +34,11 @@ msgstr ""
 msgid "https://cyberwire.nl/"
 msgstr ""
 
-#: emojisettings.php:126
-#: emojisettings.php:147
+#: emojisettings.php:111
+#: emojisettings.php:212
 msgid "Emoji Conversion"
 msgstr ""
 
-#: emojisettings.php:153
+#: emojisettings.php:218
 msgid "Enable text to emoji conversion"
 msgstr ""

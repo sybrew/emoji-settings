@@ -1,11 +1,11 @@
 === Emoji Settings ===
 Contributors: Cybr
 Donate link: https://github.com/sponsors/sybrew
-Tags: Emoji, emojis, emoticon, script, tinymce, mail, scrips, prefetch, twemoji
+Tags: emoji, emojis, emoticon, script, twemoji
 Requires at least: 5.5
-Tested up to: 6.4
-Stable tag: 2.0.1
-Requires PHP: 7.2.0
+Tested up to: 6.6
+Stable tag: 3.0.0
+Requires PHP: 7.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -48,16 +48,25 @@ You can contribute by translating Emoji Settings via the sidebar on this page.
 
 You can implement this filter to achieve that:
 
-`add_filter( 'cw_emoji_overrides', function( $overrides ) {
-	$overrides['default'] = '0'; // Set disabled by default.
-	return $overrides;
-} );`
+`add_filter(
+	'cw_emoji_overrides',
+	function ( $overrides ) {
+		$overrides['default'] = '0'; // Set disabled by default.
+		return $overrides;
+	},
+);`
 
 == Changelog ==
 
-= 2.0.1 =
-* Now stores the default setting in the database. This prevents extraneous lookups for unconfigured websites.
+= 3.0.0 =
+* Rewritten the plugin again. It is now procedural instead of needlessly object-based, improving performance significantly.
+* Now requires PHP 7.4 or later.
+* Now stores the default setting in the database. This prevents extraneous database queries for unconfigured websites.
 * When emojis conversion is disabled, the string `'0'` will now be stored in the database, instead of an empty string `''`. This will only take effect when the writing settings are resaved.
+* The plugin's translation object is now only loaded in the admin area, reducing load for the front-end.
+* Removed filter `cw_emoji_settings_load`. Use `remove_action()` instead.
+* Removed function `CyberWire\Emoji_Settings\init()`.
+* Removed class `CyberWire\Emoji_Settings\Emoji_Settings`.
 
 = 2.0.0 =
 * Rewritten for improved performance.

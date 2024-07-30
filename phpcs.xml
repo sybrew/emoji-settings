@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ruleset name="Emoji Settings">
+	<description>The coding standard used for Emoji Settings plugin for WordPress.</description>
+
+	<!-- Get it here: https://github.com/theseoframework/wpcs-tsf -->
+	<rule ref="TSF"/>
+
+	<!-- Defined at wpcs-tsf. We cannot override that here... -->
+	<!-- <config name="minimum_supported_wp_version" value="5.5"/> -->
+	<!-- <config name="testVersion" value="7.2-"/> -->
+
+	<rule ref="TSF.Performance.Opcodes">
+		<properties>
+			<!-- Can we drop these exceptions at 3.0, perhaps use keywords may then be supported? -->
+			<property name="userNoopChecks" type="array" value="get_setting_overrides"/>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array" value="emoji-settings"/>
+		</properties>
+	</rule>
+
+	<!-- Exclude index.php files. They are inert in (our) plugins unless directly included/called. -->
+	<exclude-pattern>index.php</exclude-pattern>
+
+	<!-- Check all PHP files in directory tree by default. -->
+	<arg name="extensions" value="php"/>
+	<file>.</file>
+</ruleset>
