@@ -9,6 +9,8 @@
  * License: GLPv3
  * Text Domain: emoji-settings
  * Domain Path: /language
+ * Requires at least: 5.5
+ * Requires PHP: 7.4.0
  *
  * @package CyberWire/Emoji_Settings
  */
